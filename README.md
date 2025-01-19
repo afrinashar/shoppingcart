@@ -147,9 +147,3 @@ Add role-based access control for product management (admin-only).
 Contributing
 Feel free to open issues or create pull requests if you’d like to contribute!
 
-License
-This project is licensed under the MIT License.
-
-Author
-Your Name
-GitHub Profile
