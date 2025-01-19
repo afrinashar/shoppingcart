@@ -1,0 +1,37 @@
+---
+import React, { useEffect, useState } from "react";
+import ProductCard from "@/components/ProductCard";
+import Navbar from "@/components/Navbar";
+import axios from "axios";
+
+const Home = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    const response = await axios.get("http://localhost:5000/api/products");
+    setProducts(response.data);
+  };
+
+  const addToCart = async (productId: string) => {
+    await axios.post("http://localhost:5000/api/cart", { productId, quantity: 1 });
+    alert("Item added to cart");
+  };
+
+  return (
+    <>
+      <Navbar />
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1rem" }}>
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} onAddToCart={addToCart} />
+        ))}
+      </div>
+    </>
+  );
+};
+
+export default Home;
+---
