@@ -1,8 +1,17 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 
-const cartItemSchema = new mongoose.Schema({
-  productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+ export interface ICartItem extends Document {
+  productId: string;
+  quantity: number;
+  user: string;  
+  productPrice: number;
+}
+
+const CartItemSchema: Schema = new Schema({
+  productId: { type: String, required: true },
   quantity: { type: Number, required: true },
+  user: { type: String, required: true },
+  productPrice: { type: Number, required: true }, 
 });
 
-export const CartItem = mongoose.model("CartItem", cartItemSchema);
+export const CartItem = mongoose.model<ICartItem>("CartItem", CartItemSchema);
